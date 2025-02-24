@@ -1,0 +1,40 @@
+# Copyright 2025 Canonical Ltd.
+# See LICENSE file for licensing details.
+
+name: draupnir
+summary: Draupnir snap
+description: A moderation tool for Matrix
+version: 2.1.0
+base: core22
+license: Apache-2.0
+confinement: strict
+architectures:
+  - build-on: [amd64]
+    build-for: [amd64]
+apps:
+  draupnir:
+    command: "bin/node $SNAP/draupnir/index.js"
+    plugs:
+      - network
+parts:
+    node:
+        plugin: dump
+        source: https://nodejs.org/dist/v20.18.3/node-v20.18.3-linux-x64.tar.xz
+        stage:
+            - bin
+            - include
+            - lib
+    install-draupnir:
+        after: [node]
+        plugin: nil
+        source: https://github.com/the-draupnir-project/Draupnir.git
+        source-tag: v2.1.0
+        source-type: git
+        override-build: |
+            npm install -g yarn@1.22.19
+            yarn install
+            yarn build
+            mv lib $CRAFT_PRIME/mjolnir
+            mv node_modules $CRAFT_PRIME/
+            mv draupnir-entrypoint.sh $CRAFT_PRIME/
+
