@@ -7,7 +7,7 @@
         "---",
 		"### Pre-merge checks",
         "- [ ] The Release Notes do not describe any breaking changes.",
-        "- [ ] The Node version is the same as the one in the [Mjolnir Dockerfile](https://github.com/the-draupnir-project/Draupnir/blob/main/Dockerfile)."
+        "- [ ] The Node version is the same as the one in the [Draupnir Dockerfile](https://github.com/the-draupnir-project/Draupnir/blob/main/Dockerfile)."
   ],
   "regexManagers": [
     {

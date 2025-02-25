@@ -34,7 +34,7 @@ parts:
             npm install -g yarn@1.22.19
             yarn install
             yarn build
-            mv lib $CRAFT_PRIME/mjolnir
+            mv lib $CRAFT_PRIME/draupnir
             mv node_modules $CRAFT_PRIME/
             mv draupnir-entrypoint.sh $CRAFT_PRIME/
 
