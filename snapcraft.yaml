@@ -37,4 +37,5 @@ parts:
             mv lib $CRAFT_PRIME/draupnir
             mv node_modules $CRAFT_PRIME/
             mv draupnir-entrypoint.sh $CRAFT_PRIME/
+            echo $SNAPCRAFT_PROJECT_VERSION > $CRAFT_PRIME/version.txt
 
