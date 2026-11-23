@@ -13,13 +13,13 @@ architectures:
     build-for: [amd64]
 apps:
   draupnir:
-    command: "bin/node $SNAP/draupnir/index.js"
+    command: "bin/node $SNAP/draupnir/apps/draupnir/dist/index.js"
     plugs:
       - network
 parts:
     node:
         plugin: dump
-        source: https://nodejs.org/dist/v20.19.5/node-v20.19.5-linux-x64.tar.xz
+        source: https://nodejs.org/dist/v24.22.3/node-v24.22.3-linux-x64.tar.xz
         stage:
             - bin
             - include
@@ -31,11 +31,10 @@ parts:
         source-tag: v3.2.0
         source-type: git
         override-build: |
-            npm install -g yarn@1.22.22
-            yarn install
-            yarn build
-            mv lib $CRAFT_PRIME/draupnir
-            mv node_modules $CRAFT_PRIME/
-            mv draupnir-entrypoint.sh $CRAFT_PRIME/
-            echo $SNAPCRAFT_PROJECT_VERSION > $CRAFT_PRIME/version.txt
+            npm ci
+            npm run build
+            npm prune --omit=dev
+            mkdir -p $CRAFT_PRIME/draupnir
+            mv apps packages node_modules draupnir-entrypoint.sh $CRAFT_PRIME/draupnir/
+            echo $SNAPCRAFT_PROJECT_VERSION > $CRAFT_PRIME/draupnir/apps/draupnir/version.txt
 
